@@ -7,6 +7,10 @@ import org.iesinfantaelena.model.Cafe;
 import java.util.List;
 
 public class Main {
+    /**
+     * Método para visualizar las listas de cafes devueltas
+     * @param listaCafes
+     */
     public static void imprimirLista(List<Cafe> listaCafes){
         for(Cafe lista : listaCafes){
             System.out.println(lista.getNombre() + ", " + lista.getProvid() + ", " + lista.getPrecio() + "€, " + lista.getVentas() + ", " + lista.getTotal());
@@ -46,13 +50,13 @@ public class Main {
 
         System.out.println();
 
-        System.out.println("---Transferimos las ventas del Americano al Espresso e imprimimos de nuevo la tabla");
+        System.out.println("---Transferimos las ventas del Americano al Espresso e imprimimos de nuevo la tabla---");
         cafeTemp.transferencia("Americano", "Espresso");
         cafeTemp.verTabla();
 
         System.out.println();
 
-        System.out.println("---Actualizamos las ventas del Americano e imprimimos la tabla");
+        System.out.println("---Actualizamos las ventas del Americano e imprimimos la tabla---");
         cafeTemp.actualizar(cafe2);
         cafeTemp.verTabla();
     }
