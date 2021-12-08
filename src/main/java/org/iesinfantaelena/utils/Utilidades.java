@@ -33,7 +33,7 @@ public class Utilidades {
     private int portNumber;
     private Properties prop;
 
-    private static final String PROPERTIES_FILE = System.getProperty("user.dir") + "/src/main/resources/h2-properties.xml";
+    private static final String PROPERTIES_FILE = "src/main/resources/h2-properties.xml";
 
     public Utilidades() throws FileNotFoundException, IOException, InvalidPropertiesFormatException {
         super();
@@ -108,11 +108,9 @@ public class Utilidades {
                     connectionProps);
 
         } else if (this.dbms.equals("sqlite")) {
-            conn = DriverManager
-                    .getConnection("jdbc:" + this.dbms + ":" + System.getProperty("user.dir") + this.dbName);
+            conn = DriverManager.getConnection("jdbc:" + this.dbms + ":" + System.getProperty("user.dir") + this.dbName);
         } else if (this.dbms.equals("h2")) {
-            conn = DriverManager
-                    .getConnection("jdbc:" + this.dbms + ":" + this.dbName + "," +this.userName+"," );
+            conn = DriverManager.getConnection("jdbc:" + this.dbms + ":" + this.dbName + "," + this.userName + ",");
         }
         System.out.println("Connectado a BD");
         return conn;
@@ -137,7 +135,6 @@ public class Utilidades {
 
     /**
      * Metodo para imprimir la información de una Excepción SQL y poder depurar errores fácilmente
-     * @param ex
      */
     public static void printSQLException(SQLException e) {
 
