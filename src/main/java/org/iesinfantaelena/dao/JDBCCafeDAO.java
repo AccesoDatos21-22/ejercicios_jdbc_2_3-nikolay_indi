@@ -73,6 +73,10 @@ public class JDBCCafeDAO implements CafeDAO{
 
     }
 
+    /**
+     * Métodos para hacer las consultas a la base de datos
+     * @throws AccesoDatosException
+     */
     @Override
     public void verTabla() throws AccesoDatosException {
         try {
@@ -82,11 +86,10 @@ public class JDBCCafeDAO implements CafeDAO{
             while (rs.next()) {
                 String coffeeName = rs.getString("nombre_cafe");
                 int supplierID = rs.getInt("proveedorId");
-                float PRECIO = rs.getFloat("precio");
-                int VENTAS = rs.getInt("ventas");
+                float precio = rs.getFloat("precio");
+                int ventas = rs.getInt("ventas");
                 int total = rs.getInt("total");
-                System.out.println(coffeeName + ", " + supplierID + ", "
-                        + PRECIO + "€, " + VENTAS + ", " + total);
+                System.out.println(coffeeName + ", " + supplierID + ", " + precio + "€, " + ventas + ", " + total);
             }
         } catch (SQLException sqle) {
             Utilidades.printSQLException(sqle);
@@ -309,6 +312,9 @@ public class JDBCCafeDAO implements CafeDAO{
         }
     }
 
+    /**
+     * Método para cerrar la conexión
+     */
     @Override
     public void cerrar() {
         if (con != null) {
@@ -316,6 +322,9 @@ public class JDBCCafeDAO implements CafeDAO{
         }
     }
 
+    /**
+     * Método para vaciar todos los recursos utilizados en el programa
+     */
     @Override
     public void liberar() {
         try {
