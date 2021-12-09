@@ -8,13 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestCafeDAO {
 
-    private CafeDAO cafeDAO;
 
     @Test
     @DisplayName("La conexión no debería lanza una excepción")
         void conexion() {
             assertDoesNotThrow(() -> {
-                 cafeDAO= FactoriaDAO.getInstance().getCafeDAO();
+                CafeDAO  cafeDAO= FactoriaDAO.getInstance().getCafeDAO();
 
             });
         }
@@ -23,9 +22,10 @@ public class TestCafeDAO {
     void insertar() {
         assertDoesNotThrow(() -> {
             Cafe test;
-            Cafe cafe = new Cafe("Cafetito", 150, 1.0f, 100,1000);
-            cafeDAO.insertar(cafe);
-            assertEquals(cafe, cafeDAO.obtener(cafe));
+            test = new Cafe("Cafetito", 150, 1.0f, 100,1000);
+            CafeDAO cafeDAO= FactoriaDAO.getInstance().getCafeDAO();
+            cafeDAO.insertar(test);
+            assertEquals(test, cafeDAO.obtener(test));
         });
     }
 

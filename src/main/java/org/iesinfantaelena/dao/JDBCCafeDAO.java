@@ -254,7 +254,7 @@ public class JDBCCafeDAO implements CafeDAO{
 
     @Override
     public Cafe obtener(Cafe cafe) throws AccesoDatosException {
-        return null;
+        return cafe;
     }
 
     @Override

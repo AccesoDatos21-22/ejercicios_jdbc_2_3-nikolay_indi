@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestCafeDAO" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-09T08:13:34" hostname="DESKTOP-TGVH71D" time="0.021">
+<testsuite name="TestCafeDAO" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-09T09:06:05" hostname="DESKTOP-TGVH71D" time="0.18">
   <properties/>
-  <testcase name="insertar()" classname="TestCafeDAO" time="0.021"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="insertar()" classname="TestCafeDAO" time="0.18"/>
+  <system-out><![CDATA[Connectado a BD
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
