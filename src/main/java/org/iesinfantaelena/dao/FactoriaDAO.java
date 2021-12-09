@@ -37,9 +37,12 @@ public class  FactoriaDAO {
      * @throws AccesoDatosException
      */
     public AlumnoDAO getAlumnoDAO() throws AccesoDatosException {
+        AlumnoDAO alumDAO = null;
 
-        return null;
-
+        if (alumnoDAO.equals("JDBCAlumnoDAO")) {
+            alumDAO = new JDBCAlumnoDAO();
+        }
+        return alumDAO;
     }
 
     /**
@@ -50,9 +53,12 @@ public class  FactoriaDAO {
      * @throws AccesoDatosException
      */
     public AsignaturaDAO getAsignaturaDAO() throws AccesoDatosException {
+        AsignaturaDAO asigDAO = null;
 
-        return null;
-
+        if (asignaturaDAO.equals("JDBCAsignaturaDAO")) {
+            asigDAO = new JDBCAsignaturaDAO();
+        }
+        return asigDAO;
     }
 
     /**
@@ -94,9 +100,12 @@ public class  FactoriaDAO {
      * @throws AccesoDatosException
      */
     public ProveedorDAO getProveedorDAO() throws AccesoDatosException {
+        ProveedorDAO pdao = null;
 
-       return null;
-
+        if (proveedorDAO.equals("JDBCProveedorDAO")) {
+            pdao = new JDBCProveedorDAO();
+        }
+        return pdao;
     }
 
 

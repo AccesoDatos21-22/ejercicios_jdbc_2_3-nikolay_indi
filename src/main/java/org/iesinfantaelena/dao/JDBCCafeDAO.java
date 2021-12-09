@@ -132,22 +132,24 @@ public class JDBCCafeDAO implements CafeDAO{
 
     @Override
     public void insertar(String nombre, int provid, float precio, int ventas, int total) throws AccesoDatosException {
-        try {
-            pstmt = con.prepareStatement(INSERT_CAFE_QUERY);
+        if(nombre != null){
+            try {
+                pstmt = con.prepareStatement(INSERT_CAFE_QUERY);
 
-            pstmt.setString(1, nombre);
-            pstmt.setInt(2, provid);
-            pstmt.setFloat(3, precio);
-            pstmt.setInt(4, ventas);
-            pstmt.setInt(5, total);
+                pstmt.setString(1, nombre);
+                pstmt.setInt(2, provid);
+                pstmt.setFloat(3, precio);
+                pstmt.setInt(4, ventas);
+                pstmt.setInt(5, total);
 
-            pstmt.executeUpdate();
-        } catch (SQLException sqle) {
-            Utilidades.printSQLException(sqle);
-            throw new AccesoDatosException(
-                    "Ocurrió un error al acceder a los datos");
-        } finally {
-            liberar();
+                pstmt.executeUpdate();
+            } catch (SQLException sqle) {
+                Utilidades.printSQLException(sqle);
+                throw new AccesoDatosException(
+                        "Ocurrió un error al acceder a los datos");
+            } finally {
+                liberar();
+            }
         }
     }
 
@@ -257,22 +259,24 @@ public class JDBCCafeDAO implements CafeDAO{
 
     @Override
     public void insertar(Cafe cafe) throws AccesoDatosException {
-        try {
-            pstmt = con.prepareStatement(INSERT_CAFE_QUERY);
+        if(cafe.getNombre() != null){
+            try {
+                pstmt = con.prepareStatement(INSERT_CAFE_QUERY);
 
-            pstmt.setString(1, cafe.getNombre());
-            pstmt.setInt(2, cafe.getProvid());
-            pstmt.setFloat(3, cafe.getPrecio());
-            pstmt.setInt(4, cafe.getVentas());
-            pstmt.setInt(5, cafe.getTotal());
+                pstmt.setString(1, cafe.getNombre());
+                pstmt.setInt(2, cafe.getProvid());
+                pstmt.setFloat(3, cafe.getPrecio());
+                pstmt.setInt(4, cafe.getVentas());
+                pstmt.setInt(5, cafe.getTotal());
 
-            pstmt.executeUpdate();
-        } catch (SQLException sqle) {
-            Utilidades.printSQLException(sqle);
-            throw new AccesoDatosException(
-                    "Ocurrió un error al acceder a los datos");
-        } finally {
-            liberar();
+                pstmt.executeUpdate();
+            } catch (SQLException sqle) {
+                Utilidades.printSQLException(sqle);
+                throw new AccesoDatosException(
+                        "Ocurrió un error al acceder a los datos");
+            } finally {
+                liberar();
+            }
         }
     }
 
