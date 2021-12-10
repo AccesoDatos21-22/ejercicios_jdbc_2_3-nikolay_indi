@@ -132,7 +132,7 @@ public class JDBCCafeDAO implements CafeDAO{
 
     @Override
     public void insertar(String nombre, int provid, float precio, int ventas, int total) throws AccesoDatosException {
-        if(nombre != null && buscar(nombre) == null){
+        if(nombre != null && buscar(nombre).size() == 0){
             try {
                 pstmt = con.prepareStatement(INSERT_CAFE_QUERY);
 
