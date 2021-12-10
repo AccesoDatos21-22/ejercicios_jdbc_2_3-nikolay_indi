@@ -2,8 +2,11 @@ package org.iesinfantaelena;
 
 import org.iesinfantaelena.dao.AccesoDatosException;
 import org.iesinfantaelena.dao.JDBCAlumnoDAO;
+import org.iesinfantaelena.dao.JDBCAsignaturaDAO;
 import org.iesinfantaelena.dao.MatriculaException;
 import org.iesinfantaelena.model.Alumno;
+import org.iesinfantaelena.model.Asignatura;
+import org.sqlite.JDBC;
 
 import java.util.List;
 
@@ -29,6 +32,13 @@ public class Main {
 
         JDBCAlumnoDAO alumnoDAO = new JDBCAlumnoDAO();
 
+        Asignatura asig1 = new Asignatura(1, "Acceso a datos", "Trimenstral", 10);
+        Asignatura asig2 = new Asignatura(2, "Desarrollo de interfaces", "Trimenstral", 20);
+        Asignatura asig3 = new Asignatura(3, "Programación de servicios y procesos", "Trimenstral", 10);
+
+        JDBCAsignaturaDAO asignaturaDAO = new JDBCAsignaturaDAO();
+
+        System.out.println("---Agregamos alumnos---");
         alumnoDAO.insertar(alu1);
         alumnoDAO.insertar(alu2);
         alumnoDAO.insertar(alu3);
@@ -36,5 +46,23 @@ public class Main {
         System.out.println("\n---Buscamos alumno por id---\n" + alumnoDAO.buscar(1).toString());
 
         System.out.println("\n---Buscamos alumno por nombre---\n" + imprimirLista(alumnoDAO.buscar("Jorge")).toString());
+
+        System.out.println("\n---Borramos un alumno---");
+        alumnoDAO.borrar(3);
+
+        System.out.println("\n---Agregamos asignaturas---");
+        asignaturaDAO.insertar(asig1);
+        asignaturaDAO.insertar(asig2);
+        asignaturaDAO.insertar(asig3);
+
+        System.out.println("\n---Buscamos una asignatura por nombre---\n" + asignaturaDAO.buscar("Acceso a datos").toString());
+
+        System.out.println("\n---Buscamos una asignatura por id---\n" + asignaturaDAO.buscar(3));
+
+        System.out.println("\n---Borramos una asignatura---");
+        asignaturaDAO.borrar(asig2);
+
+        System.out.println("\n---Mátriculamos a un alumno en una asignatura---");
+        alumnoDAO.matricular(alu1, asig1);
     }
 }

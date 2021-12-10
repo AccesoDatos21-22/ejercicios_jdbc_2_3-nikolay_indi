@@ -147,10 +147,10 @@ public class JDBCAlumnoDAO implements AlumnoDAO{
     @Override
     public void borrar(int id) throws MatriculaException {
         try{
-            pstmt = con.prepareStatement(DELETE_ALUMNO_QUERY);
+            pstmt = con.prepareStatement(DELETE_ALUMNO_ASIGNATURA_QUERY);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
-            pstmt = con.prepareStatement(DELETE_ALUMNO_ASIGNATURA_QUERY);
+            pstmt = con.prepareStatement(DELETE_ALUMNO_QUERY);
             pstmt.setInt(1, id);
 
             System.out.println("Se ha borrado " + pstmt.executeUpdate() + " alumno");
@@ -169,7 +169,9 @@ public class JDBCAlumnoDAO implements AlumnoDAO{
             pstmt.setInt(2, asignatura.getIdentificador());
             pstmt.setBoolean(3, true);
 
-            System.out.println("Se ha matriculado " + pstmt + " alumno");
+            System.out.println("Se ha matriculado " + pstmt.executeUpdate() + " alumno");
+
+
         } catch(SQLException sqle){
             Utilidades.printSQLException(sqle);
         } finally {
