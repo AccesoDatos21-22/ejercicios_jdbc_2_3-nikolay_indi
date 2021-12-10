@@ -5,17 +5,15 @@ public class Asignatura {
     private String nombre;
     private String tipo;
     private float creditos;
-    private boolean superada;
 
     public Asignatura() {
     }
 
-    public Asignatura(int identificador, String nombre, String tipo, float creditos, boolean superada) {
+    public Asignatura(int identificador, String nombre, String tipo, float creditos) {
         this.identificador = identificador;
         this.nombre = nombre;
         this.tipo = tipo;
         this.creditos = creditos;
-        this.superada = superada;
     }
 
     public int getIdentificador() {
@@ -50,14 +48,6 @@ public class Asignatura {
         this.creditos = creditos;
     }
 
-    public boolean isSuperada() {
-        return superada;
-    }
-
-    public void setSuperada(boolean superada) {
-        this.superada = superada;
-    }
-
     @Override
     public String toString() {
         return "Asignatura{" +
@@ -65,7 +55,6 @@ public class Asignatura {
                 ", nombre='" + nombre + '\'' +
                 ", tipo='" + tipo + '\'' +
                 ", creditos=" + creditos +
-                ", superada=" + superada +
                 '}';
     }
 }
