@@ -132,7 +132,7 @@ public class JDBCCafeDAO implements CafeDAO{
 
     @Override
     public void insertar(String nombre, int provid, float precio, int ventas, int total) throws AccesoDatosException {
-        if(nombre != null){
+        if(nombre != null && buscar(nombre) == null){
             try {
                 pstmt = con.prepareStatement(INSERT_CAFE_QUERY);
 
@@ -158,9 +158,10 @@ public class JDBCCafeDAO implements CafeDAO{
         try {
             pstmt = con.prepareStatement(DELETE_CAFE_QUERY);
             pstmt.setString(1, nombre);
-            pstmt.executeUpdate();
 
-            System.out.println("El café " + nombre + " ha sido borrado.");
+            if(pstmt.executeUpdate() > 0){
+                System.out.println("El café " + nombre + " ha sido borrado.");
+            }
         } catch (SQLException sqle) {
             Utilidades.printSQLException(sqle);
             throw new AccesoDatosException(
@@ -189,21 +190,11 @@ public class JDBCCafeDAO implements CafeDAO{
 
                 listaCafes.add(cafeTemporal);
             }
-        } catch (SQLException var23) {
-            Utilidades.printSQLException(var23);
+        } catch (SQLException sqle) {
+            Utilidades.printSQLException(sqle);
             throw new AccesoDatosException("Ocurrió un error al acceder a los datos");
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (SQLException var21) {
-                Utilidades.printSQLException(var21);
-            }
+            liberar();
         }
         return listaCafes;
     }
@@ -254,7 +245,26 @@ public class JDBCCafeDAO implements CafeDAO{
 
     @Override
     public Cafe obtener(Cafe cafe) throws AccesoDatosException {
-        return cafe;
+        boolean encontrado = false;
+        try{
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(SELECT_CAFES_QUERY);
+
+            while(rs.next()){
+                if(cafe.getNombre().equals(rs.getString(1))){
+                    encontrado = true;
+                }
+            }
+        } catch(SQLException sqle){
+            Utilidades.printSQLException(sqle);
+        } finally {
+            liberar();
+        }
+        if(encontrado){
+            return cafe;
+        } else{
+            return null;
+        }
     }
 
     @Override

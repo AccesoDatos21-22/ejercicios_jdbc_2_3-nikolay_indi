@@ -8,16 +8,6 @@ public class  FactoriaDAO {
     private static final String cafeDAO = "JDBCCafeDAO";
     private static final String proveedorDAO = "JDBCProveedorDAO";
 
-    // Patrón Singleton
-    // Garantiza que una clase sólo tenga una instancia y proporciona un punto
-    // de acceso global a ella.
-    // Si un objeto no tiene estado (atributos), no necesitamos múltiples
-    // instancias
-    // del mismo cargadas en memoria
-    // No utilizamos métodos estáticos, pues perderiamos todas las ventajas de
-    // la OO
-    // como la herencia
-    // Si tuviésemos atributos de objetos-->!!No usar singleton
     public static FactoriaDAO getInstance() {
         if (instance == null) {
             instance = new FactoriaDAO();
