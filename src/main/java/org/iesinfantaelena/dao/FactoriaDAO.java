@@ -69,26 +69,11 @@ public class  FactoriaDAO {
      * @throws AccesoDatosException
      */
     public CafeDAO getCafeDAO() throws AccesoDatosException {
-        /*
-         * Como esta clase es estática no podemos hacerlo usando Class.forName, pues no se puede determinar el tipo en t.compilación
-         * try { return (LibroDAO) Class.forName(libroDAO).newInstance(); }
-         * catch (Exception e) {
-         * System.err.println(e.getMessage()+"/n"+e.toString()); throw new
-         * AccesoDatosException( "Ocurrió un error al acceder a los datos"); }
-         */
-
-		/*TODO: en un caso real el tipo del DAO se lee de un fichero de propiedades y/ó se utiliza Class.forName().newInstance() si la
-		  clase no es estática. Al leerlo de un fichero de propiedades conseguimos que si el tipo del DAO cambia, no hay que tocar el código,y
-		  por tanto no hay que regenerar el bytecode*/
-
-        //Podemos inicializar el DAO a null o a uno por defecto
-        CafeDAO cdao = null;
-
-        //Un if por cada tipo de DAO posible a instanciar
+        CafeDAO cDAO = null;
         if (cafeDAO.equals("JDBCCafeDAO")) {
-            cdao = new JDBCCafeDAO();
+            cDAO = new JDBCCafeDAO();
         }
-        return cdao;
+        return cDAO;
 
     }
 
@@ -100,15 +85,13 @@ public class  FactoriaDAO {
      * @throws AccesoDatosException
      */
     public ProveedorDAO getProveedorDAO() throws AccesoDatosException {
-        ProveedorDAO pdao = null;
+        ProveedorDAO proDAO = null;
 
         if (proveedorDAO.equals("JDBCProveedorDAO")) {
-            pdao = new JDBCProveedorDAO();
+            proDAO = new JDBCProveedorDAO();
         }
-        return pdao;
+        return proDAO;
     }
-
-
 }
 
 
