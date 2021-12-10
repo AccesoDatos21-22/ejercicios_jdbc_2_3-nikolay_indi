@@ -18,7 +18,7 @@ public class JDBCCafeDAO implements CafeDAO{
     /**
      * Declaración de variable con la ruta del fichero que contiene las propiedades para la conexión a la base de datos
      */
-    //private static final String PROPERTIES_FILE = "src/main/resources/h2-properties.xml";
+    private static final String PROPERTIES_FILE = "src/main/resources/h2-properties.xml";
 
     /**
      * Consultas a realizar en la base de datos
@@ -52,7 +52,7 @@ public class JDBCCafeDAO implements CafeDAO{
     public JDBCCafeDAO() throws AccesoDatosException {
         try {
             // Obtenemos la conexión
-            this.con = new Utilidades().getConnection();
+            this.con = new Utilidades(PROPERTIES_FILE).getConnection();
             this.stmt = con.createStatement();
             this.rs = null;
             this.pstmt = null;

@@ -1,8 +1,8 @@
 package org.iesinfantaelena;
 
-import org.iesinfantaelena.dao.AccesoDatosException;
-import org.iesinfantaelena.dao.JDBCCafeDAO;
-import org.iesinfantaelena.dao.JDBCProveedorDAO;
+import org.iesinfantaelena.dao.*;
+import org.iesinfantaelena.model.Alumno;
+import org.iesinfantaelena.model.Asignatura;
 import org.iesinfantaelena.model.Cafe;
 import org.iesinfantaelena.model.Proveedor;
 
@@ -13,12 +13,26 @@ public class Main {
      * Método para visualizar las listas de cafes devueltas
      * @param listaCafes
      */
-    public static void imprimirLista(List<Cafe> listaCafes){
+    public static void imprimirListaCafe(List<Cafe> listaCafes){
         for(Cafe lista : listaCafes){
             System.out.println(lista.getNombre() + ", " + lista.getProvid() + ", " + lista.getPrecio() + "€, " + lista.getVentas() + ", " + lista.getTotal());
         }
     }
-    public static void main(String[] args) throws AccesoDatosException {
+    public static Alumno imprimirListaAlumno(List<Alumno> listaAlumnos) {
+        Alumno alumnoTemporal = new Alumno();
+        for (int i = 0; i < listaAlumnos.size(); i++) {
+            int id = listaAlumnos.get(i).getId();
+            String apellidos = listaAlumnos.get(i).getApellidos();
+            String nombre = listaAlumnos.get(i).getNombre();
+            int curso = listaAlumnos.get(i).getCurso();
+            int titulacion = listaAlumnos.get(i).getTitulacion();
+
+            alumnoTemporal = new Alumno(nombre, id, apellidos, curso, titulacion);
+        }
+        return alumnoTemporal;
+    }
+
+    public static void main(String[] args) throws AccesoDatosException, MatriculaException {
         JDBCCafeDAO cafeTemp = new JDBCCafeDAO();
         Cafe cafe1 = new Cafe("Latte", 1, 3.50F, 3, 45);
         Cafe cafe2 = new Cafe("Americano", 3, 1.50F, 15, 72);
@@ -37,7 +51,7 @@ public class Main {
         System.out.println();
 
         System.out.println("---Buscamos el Cappuccino---");
-        imprimirLista(cafeTemp.buscar("Cappuccino"));
+        imprimirListaCafe(cafeTemp.buscar("Cappuccino"));
 
         System.out.println();
 
@@ -48,7 +62,7 @@ public class Main {
         System.out.println();
 
         System.out.println("---Buscamos los cafes por proveedor---");
-        imprimirLista(cafeTemp.cafesPorProveedor(2));
+        imprimirListaCafe(cafeTemp.cafesPorProveedor(2));
 
         System.out.println();
 
@@ -97,5 +111,45 @@ public class Main {
         proTemporal.actualizar(pro4Nuevo);
         System.out.println(proTemporal.buscar(pro4Nuevo).toString());
 
+        System.out.println();
+
+        Alumno alu1 = new Alumno("Pedro", 1, "Gonzalez", 4, 3);
+        Alumno alu2 = new Alumno("Jorge", 2, "López", 1, 2);
+        Alumno alu3 = new Alumno("Fernando", 3, "Gonalez", 3, 8);
+
+        JDBCAlumnoDAO alumnoDAO = new JDBCAlumnoDAO();
+
+        Asignatura asig1 = new Asignatura(1, "Acceso a datos", "Trimenstral", 10);
+        Asignatura asig2 = new Asignatura(2, "Desarrollo de interfaces", "Trimenstral", 20);
+        Asignatura asig3 = new Asignatura(3, "Programación de servicios y procesos", "Trimenstral", 10);
+
+        JDBCAsignaturaDAO asignaturaDAO = new JDBCAsignaturaDAO();
+
+        System.out.println("---Agregamos alumnos---");
+        alumnoDAO.insertar(alu1);
+        alumnoDAO.insertar(alu2);
+        alumnoDAO.insertar(alu3);
+
+        System.out.println("\n---Buscamos alumno por id---\n" + alumnoDAO.buscar(4338289).toString());
+
+        System.out.println("\n---Buscamos alumno por nombre---\n" + imprimirListaAlumno(alumnoDAO.buscar("Jorge")).toString());
+
+        System.out.println("\n---Borramos un alumno---");
+        alumnoDAO.borrar(3);
+
+        System.out.println("\n---Agregamos asignaturas---");
+        asignaturaDAO.insertar(asig1);
+        asignaturaDAO.insertar(asig2);
+        asignaturaDAO.insertar(asig3);
+
+        System.out.println("\n---Buscamos una asignatura por nombre---\n" + asignaturaDAO.buscar("Acceso a datos").toString());
+
+        System.out.println("\n---Buscamos una asignatura por id---\n" + asignaturaDAO.buscar(78200));
+
+        System.out.println("\n---Borramos una asignatura---");
+        asignaturaDAO.borrar(asig2);
+
+        System.out.println("\n---Mátriculamos a un alumno en una asignatura---");
+        alumnoDAO.matricular(alu1, asig1);
     }
 }
