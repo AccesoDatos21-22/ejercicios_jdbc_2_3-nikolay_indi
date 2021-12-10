@@ -70,9 +70,6 @@ public class Proveedor {
                 + nombre + ", calle=" + calle + ", ciudad=" + ciudad
                 + ", pais=" + pais + ", cp=" + cp + "]";
     }
-
-
-
 }
 
 

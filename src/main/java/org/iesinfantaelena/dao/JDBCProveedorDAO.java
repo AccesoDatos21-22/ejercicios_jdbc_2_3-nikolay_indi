@@ -128,20 +128,22 @@ public class JDBCProveedorDAO implements  ProveedorDAO{
 
     @Override
     public void insertar(Proveedor proveedor) throws AccesoDatosException {
-        try{
-            pstmt = con.prepareStatement(INSERT_PROVEEDOR_QUERY);
-            pstmt.setInt(1, proveedor.getIdentificador());
-            pstmt.setString(2, proveedor.getNombre());
-            pstmt.setString(3, proveedor.getCalle());
-            pstmt.setString(4, proveedor.getCiudad());
-            pstmt.setString(5, proveedor.getPais());
-            pstmt.setInt(6, proveedor.getCp());
+        if(proveedor.getNombre() != null && buscar(proveedor.getNombre()).size() == 0){
+            try{
+                pstmt = con.prepareStatement(INSERT_PROVEEDOR_QUERY);
+                pstmt.setInt(1, proveedor.getIdentificador());
+                pstmt.setString(2, proveedor.getNombre());
+                pstmt.setString(3, proveedor.getCalle());
+                pstmt.setString(4, proveedor.getCiudad());
+                pstmt.setString(5, proveedor.getPais());
+                pstmt.setInt(6, proveedor.getCp());
 
-            System.out.println("Se ha insertado " + pstmt.executeUpdate() + " proveedor");
-        } catch(SQLException sqle){
-            Utilidades.printSQLException(sqle);
-        } finally {
-            liberar();
+                System.out.println("Se ha insertado " + pstmt.executeUpdate() + " proveedor");
+            } catch(SQLException sqle){
+                Utilidades.printSQLException(sqle);
+            } finally {
+                liberar();
+            }
         }
     }
 
