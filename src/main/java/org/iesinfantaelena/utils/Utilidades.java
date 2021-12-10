@@ -106,11 +106,7 @@ public class Utilidades {
         } else if (this.dbms.equals("sqlite")) {
             conn = DriverManager.getConnection("jdbc:" + this.dbms + ":" + System.getProperty("user.dir") + this.dbName);
         } else if (this.dbms.equals("h2")) {
-<<<<<<< HEAD
-            conn = DriverManager.getConnection("jdbc:" + this.dbms + ":" + this.dbName + "," + this.userName + ",");
-=======
             conn = DriverManager.getConnection("jdbc:" + this.dbms + ":" + this.dbName + "," +this.userName+"," );
->>>>>>> Ejercicio_2
         }
         System.out.println("Connectado a BD");
         return conn;

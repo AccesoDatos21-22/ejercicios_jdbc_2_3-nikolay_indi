@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestProveedorDAO" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-12-10T21:56:43" hostname="DESKTOP-TGVH71D" time="0.237">
+<testsuite name="TestProveedorDAO" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-12-10T22:02:52" hostname="DESKTOP-TGVH71D" time="0.259">
   <properties/>
-  <testcase name="buscar()" classname="TestProveedorDAO" time="0.201"/>
-  <testcase name="actualizar()" classname="TestProveedorDAO" time="0.017"/>
-  <testcase name="conexion()" classname="TestProveedorDAO" time="0.005"/>
-  <testcase name="eliminar()" classname="TestProveedorDAO" time="0.006"/>
-  <testcase name="insertar()" classname="TestProveedorDAO" time="0.005"/>
+  <testcase name="buscar()" classname="TestProveedorDAO" time="0.224"/>
+  <testcase name="actualizar()" classname="TestProveedorDAO" time="0.01"/>
+  <testcase name="conexion()" classname="TestProveedorDAO" time="0.006"/>
+  <testcase name="eliminar()" classname="TestProveedorDAO" time="0.009"/>
+  <testcase name="insertar()" classname="TestProveedorDAO" time="0.007"/>
   <system-out><![CDATA[Connectado a BD
 Releasing all open resources ...
 Connectado a BD
