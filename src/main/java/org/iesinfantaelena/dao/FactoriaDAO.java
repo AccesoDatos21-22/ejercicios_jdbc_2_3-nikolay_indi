@@ -94,9 +94,13 @@ public class  FactoriaDAO {
      * @throws AccesoDatosException
      */
     public ProveedorDAO getProveedorDAO() throws AccesoDatosException {
+        ProveedorDAO proDAO = null;
 
-       return null;
-
+        //Un if por cada tipo de DAO posible a instanciar
+        if (proveedorDAO.equals("JDBCCafeDAO")) {
+            proDAO = new JDBCProveedorDAO();
+        }
+        return proDAO;
     }
 
 
