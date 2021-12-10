@@ -100,17 +100,17 @@ public class Utilidades {
              * La URL varia según el gestor de BD, jdbc:mysql://127.0.0.1:3306/libros,
              * jdbc:oracle:thin:@192.168.239.142:1521:libros
              */
-            conn = DriverManager.getConnection(
-                    "jdbc:" + this.dbms + "://" + this.serverName + ":" + this.portNumber + "/" + this.dbName,
-                    connectionProps);
+            conn = DriverManager.getConnection("jdbc:" + this.dbms + "://" + this.serverName + ":" + this.portNumber + "/" + this.dbName, connectionProps);
         } else if (this.dbms.equals("derby")) {
-            conn = DriverManager.getConnection("jdbc:" + this.dbms + ":" + this.dbName + ";create=true",
-                    connectionProps);
-
+            conn = DriverManager.getConnection("jdbc:" + this.dbms + ":" + this.dbName + ";create=true", connectionProps);
         } else if (this.dbms.equals("sqlite")) {
             conn = DriverManager.getConnection("jdbc:" + this.dbms + ":" + System.getProperty("user.dir") + this.dbName);
         } else if (this.dbms.equals("h2")) {
+<<<<<<< HEAD
             conn = DriverManager.getConnection("jdbc:" + this.dbms + ":" + this.dbName + "," + this.userName + ",");
+=======
+            conn = DriverManager.getConnection("jdbc:" + this.dbms + ":" + this.dbName + "," +this.userName+"," );
+>>>>>>> Ejercicio_2
         }
         System.out.println("Connectado a BD");
         return conn;
