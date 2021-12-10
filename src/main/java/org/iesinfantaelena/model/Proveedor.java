@@ -15,6 +15,19 @@ public class Proveedor {
     private String ciudad;
     private String pais;
     private int cp;
+
+    public Proveedor() {
+    }
+
+    public Proveedor(int identificador, String nombre, String calle, String ciudad, String pais, int cp) {
+        this.identificador = identificador;
+        this.nombre = nombre;
+        this.calle = calle;
+        this.ciudad = ciudad;
+        this.pais = pais;
+        this.cp = cp;
+    }
+
     public int getIdentificador() {
         return identificador;
     }
