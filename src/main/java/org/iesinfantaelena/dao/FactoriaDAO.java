@@ -38,7 +38,7 @@ public class  FactoriaDAO {
      */
     public AlumnoDAO getAlumnoDAO() throws AccesoDatosException {
         AlumnoDAO alumDAO = null;
-        if (alumnoDAO.equals("JDBCCafeDAO")) {
+        if (alumnoDAO.equals("JDBCAlumnoDAO")) {
             alumDAO = new JDBCAlumnoDAO();
         }
         return alumDAO;
@@ -53,7 +53,7 @@ public class  FactoriaDAO {
      */
     public AsignaturaDAO getAsignaturaDAO() throws AccesoDatosException {
         AsignaturaDAO asigDAO = null;
-        if (asignaturaDAO.equals("JDBCCafeDAO")) {
+        if (asignaturaDAO.equals("JDBCAsignaturaDAO")) {
             asigDAO = new JDBCAsignaturaDAO();
         }
         return asigDAO;

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestAsignaturaDAO" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-12-10T22:27:16" hostname="DESKTOP-TGVH71D" time="0.22">
+  <properties/>
+  <testcase name="borrar()" classname="TestAsignaturaDAO" time="0.2"/>
+  <testcase name="buscar()" classname="TestAsignaturaDAO" time="0.006"/>
+  <testcase name="conexion()" classname="TestAsignaturaDAO" time="0.006"/>
+  <testcase name="insertar()" classname="TestAsignaturaDAO" time="0.005"/>
+  <system-out><![CDATA[Connectado a BD
+Se ha eliminado 0 asignatura
+Se ha insertado 1 asignatura
+Se ha eliminado 1 asignatura
+Releasing all open resources ...
+Connectado a BD
+Se ha insertado 1 asignatura
+Releasing all open resources ...
+Connectado a BD
+Releasing all open resources ...
+Connectado a BD
+Se ha insertado 1 asignatura
+Releasing all open resources ...
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

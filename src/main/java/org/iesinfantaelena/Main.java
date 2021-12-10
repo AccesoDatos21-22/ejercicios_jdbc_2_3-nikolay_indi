@@ -43,7 +43,7 @@ public class Main {
         alumnoDAO.insertar(alu2);
         alumnoDAO.insertar(alu3);
 
-        System.out.println("\n---Buscamos alumno por id---\n" + alumnoDAO.buscar(1).toString());
+        System.out.println("\n---Buscamos alumno por id---\n" + alumnoDAO.buscar(4338289).toString());
 
         System.out.println("\n---Buscamos alumno por nombre---\n" + imprimirLista(alumnoDAO.buscar("Jorge")).toString());
 
@@ -57,7 +57,7 @@ public class Main {
 
         System.out.println("\n---Buscamos una asignatura por nombre---\n" + asignaturaDAO.buscar("Acceso a datos").toString());
 
-        System.out.println("\n---Buscamos una asignatura por id---\n" + asignaturaDAO.buscar(3));
+        System.out.println("\n---Buscamos una asignatura por id---\n" + asignaturaDAO.buscar(78200));
 
         System.out.println("\n---Borramos una asignatura---");
         asignaturaDAO.borrar(asig2);

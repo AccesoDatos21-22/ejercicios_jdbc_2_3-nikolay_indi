@@ -41,6 +41,29 @@ public class JDBCAlumnoDAO implements AlumnoDAO{
             "   constraint as_pk foreign key (id_asignatura) references asignaturas (id_asignatura) on delete cascade," +
             "constraint al_pk foreign key (id_alumno) references alumnos (id_alumno) on delete cascade" +
             ");";
+    private static final String INSERT_ALUMNOS_QUERY = "insert into alumnos values(9119705,\"JIMENEZ ALONSO\",\"DIEGO\",4,3);" +
+            "insert into alumnos values(4338289,\"MANGAS SANZ\",\"CESAR\",1,12);" +
+            "insert into alumnos values(5345629,\"BARRIGA ASENJO\",\"JOSE\",2,7);" +
+            "insert into alumnos values(5198695,\"RODRIGUEZ ROBLEDO\",\"FCO. JAVIER\",3,5);" +
+            "insert into alumnos values(5434159,\"BLAZQUEZ BLANCO\",\"SONIA\",2,7);";
+    private static final String INSERT_ALUMNOS_ASIGNATURAS_QUERY = "insert into alumnos_asignaturas values(9119705,31540,0);" +
+            "insert into alumnos_asignaturas values(9119705,32330,0);" +
+            "insert into alumnos_asignaturas values(4338289,31540,1);" +
+            "insert into alumnos_asignaturas values(4338289,32330,0);" +
+            "insert into alumnos_asignaturas values(5345629,33033,0);" +
+            "insert into alumnos_asignaturas values(5345629,32330,1);" +
+            "insert into alumnos_asignaturas values(5345629,20598,1);" +
+            "insert into alumnos_asignaturas values(5198695,31540,1);" +
+            "insert into alumnos_asignaturas values(5198695,32330,0);" +
+            "insert into alumnos_asignaturas values(5198695,33033,0);" +
+            "insert into alumnos_asignaturas values(5198695,20598,0);" +
+            "insert into alumnos_asignaturas values(5434159,32330,0);" +
+            "insert into alumnos_asignaturas values(5434159,33033,1);" +
+            "insert into alumnos_asignaturas values(5434159,20598,0);" +
+            "insert into alumnos_asignaturas values(5434159,78200,1);" +
+            "insert into alumnos_asignaturas values(4338289,20598,0);" +
+            "insert into alumnos_asignaturas values(9119705,20598,0);" +
+            "insert into alumnos_asignaturas values(9119705,78200,1);";
     private static final String SELECT_ALUMNOS_QUERY = "SELECT * FROM alumnos";
     private static final String INSERT_ALUMNO_QUERY = "INSERT INTO alumnos VALUES (?,?,?,?,?)";
     private static final String DELETE_ALUMNO_QUERY = "DELETE FROM alumnos WHERE id_alumno = ?";
@@ -59,6 +82,8 @@ public class JDBCAlumnoDAO implements AlumnoDAO{
             this.pstmt = null;
             stmt.executeUpdate(CREATE_TABLE_ALUMNOS);
             stmt.executeUpdate(CREATE_TABLE_ALUMNOS_ASIGNATURAS);
+            stmt.executeUpdate(INSERT_ALUMNOS_QUERY);
+            stmt.executeUpdate(INSERT_ALUMNOS_ASIGNATURAS_QUERY);
         } catch (IOException e) {
             // Error al leer propiedades
             // En una aplicación real, escribo en el log y delego
@@ -127,20 +152,22 @@ public class JDBCAlumnoDAO implements AlumnoDAO{
 
     @Override
     public void insertar(Alumno alumno) throws MatriculaException {
-        try{
-            pstmt = con.prepareStatement(INSERT_ALUMNO_QUERY);
-            pstmt.setInt(1, alumno.getId());
-            pstmt.setString(2, alumno.getApellidos());
-            pstmt.setString(3, alumno.getNombre());
-            pstmt.setInt(4, alumno.getCurso());
-            pstmt.setInt(5, alumno.getTitulacion());
+        if(alumno.getNombre() != null && buscar(alumno.getNombre()).size() == 0){
+            try{
+                pstmt = con.prepareStatement(INSERT_ALUMNO_QUERY);
+                pstmt.setInt(1, alumno.getId());
+                pstmt.setString(2, alumno.getApellidos());
+                pstmt.setString(3, alumno.getNombre());
+                pstmt.setInt(4, alumno.getCurso());
+                pstmt.setInt(5, alumno.getTitulacion());
 
-            System.out.println("Se ha insertado " + pstmt.executeUpdate()+ " alumno");
+                System.out.println("Se ha insertado " + pstmt.executeUpdate()+ " alumno");
 
-        } catch(SQLException sqle){
-            Utilidades.printSQLException(sqle);
-        } finally {
-            liberar();
+            } catch(SQLException sqle){
+                Utilidades.printSQLException(sqle);
+            } finally {
+                liberar();
+            }
         }
     }
 

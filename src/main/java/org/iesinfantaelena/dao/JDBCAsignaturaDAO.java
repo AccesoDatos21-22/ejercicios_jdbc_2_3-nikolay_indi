@@ -29,6 +29,11 @@ public class JDBCAsignaturaDAO implements AsignaturaDAO{
             "   creditos float not null," +
             "   constraint id_pk primary key (id_asignatura)" +
             ");";
+    private static final String INSERT_ASIGNATURAS_QUERY = "insert into asignaturas values(31540,\"OB\",\"AMPLIACION DE SISTEMAS OPERATIVOS\",4.5);" +
+            "insert into asignaturas values(32330,\"OP\",\"APLICACIONES DISTRIBUIDAS PARA BIOINGENIERIA\",3);" +
+            "insert into asignaturas values(33033,\"OP\",\"APLICACIONES TELEMATICAS\",4.5);" +
+            "insert into asignaturas values(20598,\"TR\",\"ARQUITECTURA DE COMPUTADORES\",7.5);" +
+            "insert into asignaturas values(78200,\"OP\",\"ARQUITECTURA E INGENIERIA DE COMPUTADORES\",6);";
     private static final String SELECT_ASIGNATURA_QUERY = "SELECT * FROM asignaturas";
     private static final String INSERT_ASIGNATURA_QUERY = "INSERT INTO asignaturas VALUES (?,?,?,?)";
     private static final String DELETE_ASIGNATURA_QUERY = "DELETE FROM asignaturas WHERE id_asignatura = ?";
@@ -44,6 +49,7 @@ public class JDBCAsignaturaDAO implements AsignaturaDAO{
             this.rs = null;
             this.pstmt = null;
             stmt.executeUpdate(CREATE_TABLE_ASIGNATURAS);
+            stmt.executeUpdate(INSERT_ASIGNATURAS_QUERY);
         } catch (IOException e) {
             // Error al leer propiedades
             // En una aplicación real, escribo en el log y delego
@@ -112,18 +118,20 @@ public class JDBCAsignaturaDAO implements AsignaturaDAO{
 
     @Override
     public void insertar(Asignatura asignatura) throws MatriculaException {
-        try {
-            pstmt = con.prepareStatement(INSERT_ASIGNATURA_QUERY);
-            pstmt.setInt(1, asignatura.getIdentificador());
-            pstmt.setString(2, asignatura.getTipo());
-            pstmt.setString(3, asignatura.getNombre());
-            pstmt.setFloat(4, asignatura.getCreditos());
+        if(asignatura.getNombre() != null && buscar(asignatura.getNombre()).size() == 0){
+            try {
+                pstmt = con.prepareStatement(INSERT_ASIGNATURA_QUERY);
+                pstmt.setInt(1, asignatura.getIdentificador());
+                pstmt.setString(2, asignatura.getTipo());
+                pstmt.setString(3, asignatura.getNombre());
+                pstmt.setFloat(4, asignatura.getCreditos());
 
-            System.out.println("Se ha insertado " + pstmt.executeUpdate() + " asignatura");
-        } catch (SQLException sqle){
-            Utilidades.printSQLException(sqle);
-        } finally {
-            liberar();
+                System.out.println("Se ha insertado " + pstmt.executeUpdate() + " asignatura");
+            } catch (SQLException sqle){
+                Utilidades.printSQLException(sqle);
+            } finally {
+                liberar();
+            }
         }
     }
 
