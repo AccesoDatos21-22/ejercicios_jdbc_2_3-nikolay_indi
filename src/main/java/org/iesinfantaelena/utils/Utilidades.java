@@ -33,7 +33,7 @@ public class Utilidades {
     private int portNumber;
     private Properties prop;
 
-    private static final String PROPERTIES_FILE = System.getProperty("user.dir") + "/src/main/resources/h2-properties.xml";
+    private static final String PROPERTIES_FILE = "src/main/resources/sqlite-properties.xml";
 
     public Utilidades() throws FileNotFoundException, IOException, InvalidPropertiesFormatException {
         super();
@@ -90,29 +90,13 @@ public class Utilidades {
         connectionProps.put("password", this.password);
 
         if (this.dbms.equals("mariadb")) {
-            /* Solicito a DriverManager una conexión con la base de datos */
-            /*
-             * Para identificar el controldador a usar se le proporciona una URL, si no lo
-             * encuentra lanza SQLException
-             */
-            /* formato de URL: jdbc:[host][:port]/[database] */
-            /*
-             * La URL varia según el gestor de BD, jdbc:mysql://127.0.0.1:3306/libros,
-             * jdbc:oracle:thin:@192.168.239.142:1521:libros
-             */
-            conn = DriverManager.getConnection(
-                    "jdbc:" + this.dbms + "://" + this.serverName + ":" + this.portNumber + "/" + this.dbName,
-                    connectionProps);
+            conn = DriverManager.getConnection("jdbc:" + this.dbms + "://" + this.serverName + ":" + this.portNumber + "/" + this.dbName, connectionProps);
         } else if (this.dbms.equals("derby")) {
-            conn = DriverManager.getConnection("jdbc:" + this.dbms + ":" + this.dbName + ";create=true",
-                    connectionProps);
-
+            conn = DriverManager.getConnection("jdbc:" + this.dbms + ":" + this.dbName + ";create=true", connectionProps);
         } else if (this.dbms.equals("sqlite")) {
-            conn = DriverManager
-                    .getConnection("jdbc:" + this.dbms + ":" + System.getProperty("user.dir") + this.dbName);
+            conn = DriverManager.getConnection("jdbc:" + this.dbms + ":");
         } else if (this.dbms.equals("h2")) {
-            conn = DriverManager
-                    .getConnection("jdbc:" + this.dbms + ":" + this.dbName + "," +this.userName+"," );
+            conn = DriverManager.getConnection("jdbc:" + this.dbms + ":" + this.dbName + "," +this.userName+"," );
         }
         System.out.println("Connectado a BD");
         return conn;
@@ -137,7 +121,6 @@ public class Utilidades {
 
     /**
      * Metodo para imprimir la información de una Excepción SQL y poder depurar errores fácilmente
-     * @param ex
      */
     public static void printSQLException(SQLException e) {
 
